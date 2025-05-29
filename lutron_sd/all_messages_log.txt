@@ -1,0 +1,1848 @@
+2025-05-21 18:06:50.169373
+{
+    "CommuniqueType": "SubscribeResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/3/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/3/status",
+            "OccupancyStatus": "Unknown",
+            "CurrentScene": null
+        }
+    }
+}
+
+2025-05-21 18:06:50.174833
+{
+    "CommuniqueType": "SubscribeResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/114/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/114/status",
+            "OccupancyStatus": "Unknown",
+            "CurrentScene": null
+        }
+    }
+}
+
+2025-05-21 18:06:50.178858
+{
+    "CommuniqueType": "SubscribeResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/127/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/127/status",
+            "OccupancyStatus": "Unknown",
+            "CurrentScene": null
+        }
+    }
+}
+
+2025-05-21 18:06:50.189398
+{
+    "CommuniqueType": "SubscribeResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "Level": 0,
+            "OccupancyStatus": "Unoccupied",
+            "CurrentScene": {
+                "href": "/areascene/987"
+            }
+        }
+    }
+}
+
+2025-05-21 18:06:50.206429
+{
+    "CommuniqueType": "SubscribeResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/1009/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/1009/status",
+            "Level": 100,
+            "OccupancyStatus": "Unknown",
+            "CurrentScene": {
+                "href": "/areascene/1014"
+            }
+        }
+    }
+}
+
+2025-05-21 18:06:50.218960
+{
+    "CommuniqueType": "SubscribeResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/1022/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/1022/status",
+            "Level": 0,
+            "OccupancyStatus": "Unoccupied",
+            "CurrentScene": {
+                "href": "/areascene/1026"
+            }
+        }
+    }
+}
+
+2025-05-21 18:06:50.223217
+{
+    "CommuniqueType": "SubscribeResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/1519/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/1519/status",
+            "OccupancyStatus": "Unknown",
+            "CurrentScene": {
+                "href": "/areascene/1524"
+            }
+        }
+    }
+}
+
+2025-05-21 18:06:50.234973
+{
+    "CommuniqueType": "SubscribeResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/1533/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/1533/status",
+            "Level": 100,
+            "OccupancyStatus": "Unknown",
+            "CurrentScene": null
+        }
+    }
+}
+
+2025-05-21 18:06:50.247064
+{
+    "CommuniqueType": "ExceptionResponse",
+    "Header": {
+        "MessageBodyType": "ExceptionDetail",
+        "StatusCode": "405 MethodNotAllowed",
+        "Url": "/zone/1035/status"
+    },
+    "Body": {
+        "Message": "This request is not supported"
+    }
+}
+
+2025-05-21 18:06:50.256031
+{
+    "CommuniqueType": "ExceptionResponse",
+    "Header": {
+        "MessageBodyType": "ExceptionDetail",
+        "StatusCode": "405 MethodNotAllowed",
+        "Url": "/zone/1107/status"
+    },
+    "Body": {
+        "Message": "This request is not supported"
+    }
+}
+
+2025-05-21 18:06:50.265124
+{
+    "CommuniqueType": "ExceptionResponse",
+    "Header": {
+        "MessageBodyType": "ExceptionDetail",
+        "StatusCode": "405 MethodNotAllowed",
+        "Url": "/zone/1116/status"
+    },
+    "Body": {
+        "Message": "This request is not supported"
+    }
+}
+
+2025-05-21 18:06:50.272874
+{
+    "CommuniqueType": "ExceptionResponse",
+    "Header": {
+        "MessageBodyType": "ExceptionDetail",
+        "StatusCode": "405 MethodNotAllowed",
+        "Url": "/zone/1125/status"
+    },
+    "Body": {
+        "Message": "This request is not supported"
+    }
+}
+
+2025-05-21 18:06:50.289538
+{
+    "CommuniqueType": "ExceptionResponse",
+    "Header": {
+        "MessageBodyType": "ExceptionDetail",
+        "StatusCode": "405 MethodNotAllowed",
+        "Url": "/zone/1748/status"
+    },
+    "Body": {
+        "Message": "This request is not supported"
+    }
+}
+
+2025-05-21 18:06:50.299549
+{
+    "CommuniqueType": "ExceptionResponse",
+    "Header": {
+        "MessageBodyType": "ExceptionDetail",
+        "StatusCode": "405 MethodNotAllowed",
+        "Url": "/zone/1769/status"
+    },
+    "Body": {
+        "Message": "This request is not supported"
+    }
+}
+
+2025-05-21 18:06:50.313093
+{
+    "CommuniqueType": "ExceptionResponse",
+    "Header": {
+        "MessageBodyType": "ExceptionDetail",
+        "StatusCode": "405 MethodNotAllowed",
+        "Url": "/zone/1719/status"
+    },
+    "Body": {
+        "Message": "This request is not supported"
+    }
+}
+
+2025-05-21 18:06:50.328269
+{
+    "CommuniqueType": "ExceptionResponse",
+    "Header": {
+        "MessageBodyType": "ExceptionDetail",
+        "StatusCode": "405 MethodNotAllowed",
+        "Url": "/zone/1690/status"
+    },
+    "Body": {
+        "Message": "This request is not supported"
+    }
+}
+
+2025-05-21 18:07:00.194004
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/1009/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/1009/status",
+            "CurrentScene": {
+                "href": "/areascene/1013"
+            }
+        }
+    }
+}
+
+2025-05-21 18:07:00.396535
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/1009/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/1009/status",
+            "InstantaneousPower": 0,
+            "InstantaneousMaxPower": 100
+        }
+    }
+}
+
+2025-05-21 18:07:02.992326
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/1009/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/1009/status",
+            "InstantaneousPower": 100,
+            "InstantaneousMaxPower": 100,
+            "CurrentScene": {
+                "href": "/areascene/1014"
+            }
+        }
+    }
+}
+
+2025-05-21 18:07:03.594939
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 100,
+            "InstantaneousMaxPower": 550,
+            "CurrentScene": null
+        }
+    }
+}
+
+2025-05-21 18:07:05.004470
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "CurrentScene": {
+                "href": "/areascene/991"
+            }
+        }
+    }
+}
+
+2025-05-21 18:07:05.187184
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 550,
+            "InstantaneousMaxPower": 550
+        }
+    }
+}
+
+2025-05-21 18:07:34.609154
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/1009/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/1009/status",
+            "InstantaneousPower": 0,
+            "InstantaneousMaxPower": 100,
+            "CurrentScene": {
+                "href": "/areascene/1013"
+            }
+        }
+    }
+}
+
+2025-05-21 18:07:36.810457
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 0,
+            "InstantaneousMaxPower": 550,
+            "CurrentScene": {
+                "href": "/areascene/987"
+            }
+        }
+    }
+}
+
+2025-05-21 18:07:39.224214
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "CurrentScene": {
+                "href": "/areascene/989"
+            }
+        }
+    }
+}
+
+2025-05-21 18:07:39.407070
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 550,
+            "InstantaneousMaxPower": 550
+        }
+    }
+}
+
+2025-05-21 18:07:40.018437
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "CurrentScene": {
+                "href": "/areascene/987"
+            }
+        }
+    }
+}
+
+2025-05-21 18:07:40.619258
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 0,
+            "InstantaneousMaxPower": 550
+        }
+    }
+}
+
+2025-05-21 18:07:41.014988
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "CurrentScene": {
+                "href": "/areascene/989"
+            }
+        }
+    }
+}
+
+2025-05-21 18:07:41.812533
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 550,
+            "InstantaneousMaxPower": 550
+        }
+    }
+}
+
+2025-05-21 18:07:45.015268
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/1009/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/1009/status",
+            "InstantaneousPower": 100,
+            "InstantaneousMaxPower": 100,
+            "CurrentScene": {
+                "href": "/areascene/1014"
+            }
+        }
+    }
+}
+
+2025-05-21 18:07:45.421663
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/1009/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/1009/status",
+            "CurrentScene": {
+                "href": "/areascene/1015"
+            }
+        }
+    }
+}
+
+2025-05-21 18:07:50.222340
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 0,
+            "InstantaneousMaxPower": 550,
+            "CurrentScene": {
+                "href": "/areascene/987"
+            }
+        }
+    }
+}
+
+2025-05-21 18:07:53.625783
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/1009/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/1009/status",
+            "InstantaneousPower": 0,
+            "InstantaneousMaxPower": 100,
+            "CurrentScene": {
+                "href": "/areascene/1013"
+            }
+        }
+    }
+}
+
+2025-05-21 18:07:54.831498
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/1009/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/1009/status",
+            "CurrentScene": {
+                "href": "/areascene/1014"
+            }
+        }
+    }
+}
+
+2025-05-21 18:07:55.025793
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/1009/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/1009/status",
+            "InstantaneousPower": 100,
+            "InstantaneousMaxPower": 100
+        }
+    }
+}
+
+2025-05-21 18:07:57.430573
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/1009/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/1009/status",
+            "CurrentScene": {
+                "href": "/areascene/1015"
+            }
+        }
+    }
+}
+
+2025-05-21 18:07:59.834296
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 550,
+            "InstantaneousMaxPower": 550,
+            "CurrentScene": {
+                "href": "/areascene/989"
+            }
+        }
+    }
+}
+
+2025-05-21 18:08:01.823671
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 0,
+            "InstantaneousMaxPower": 550,
+            "CurrentScene": {
+                "href": "/areascene/987"
+            }
+        }
+    }
+}
+
+2025-05-21 18:08:05.238223
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 100,
+            "InstantaneousMaxPower": 550,
+            "CurrentScene": null
+        }
+    }
+}
+
+2025-05-21 18:08:07.043057
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 550,
+            "InstantaneousMaxPower": 550,
+            "CurrentScene": {
+                "href": "/areascene/991"
+            }
+        }
+    }
+}
+
+2025-05-21 18:08:09.838669
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 100,
+            "InstantaneousMaxPower": 550,
+            "CurrentScene": null
+        }
+    }
+}
+
+2025-05-21 18:08:11.245339
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 0,
+            "InstantaneousMaxPower": 550,
+            "CurrentScene": {
+                "href": "/areascene/987"
+            }
+        }
+    }
+}
+
+2025-05-21 18:08:12.647180
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 550,
+            "InstantaneousMaxPower": 550,
+            "CurrentScene": {
+                "href": "/areascene/989"
+            }
+        }
+    }
+}
+
+2025-05-21 18:08:14.040992
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 0,
+            "InstantaneousMaxPower": 550,
+            "CurrentScene": {
+                "href": "/areascene/987"
+            }
+        }
+    }
+}
+
+2025-05-21 18:08:15.042647
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "CurrentScene": {
+                "href": "/areascene/989"
+            }
+        }
+    }
+}
+
+2025-05-21 18:08:15.242153
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 550,
+            "InstantaneousMaxPower": 550
+        }
+    }
+}
+
+2025-05-21 18:08:16.643632
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 0,
+            "InstantaneousMaxPower": 550,
+            "CurrentScene": {
+                "href": "/areascene/987"
+            }
+        }
+    }
+}
+
+2025-05-21 18:08:17.626754
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "CurrentScene": null
+        }
+    }
+}
+
+2025-05-21 18:08:17.841010
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 100,
+            "InstantaneousMaxPower": 550
+        }
+    }
+}
+
+2025-05-21 18:08:18.647334
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "CurrentScene": {
+                "href": "/areascene/987"
+            }
+        }
+    }
+}
+
+2025-05-21 18:08:19.032025
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 0,
+            "InstantaneousMaxPower": 550
+        }
+    }
+}
+
+2025-05-21 18:08:19.856602
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "CurrentScene": {
+                "href": "/areascene/989"
+            }
+        }
+    }
+}
+
+2025-05-21 18:08:20.246751
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 550,
+            "InstantaneousMaxPower": 550
+        }
+    }
+}
+
+2025-05-21 18:44:43.601093
+{
+    "CommuniqueType": "SubscribeResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/3/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/3/status",
+            "OccupancyStatus": "Unknown",
+            "CurrentScene": null
+        }
+    }
+}
+
+2025-05-21 18:44:43.616071
+{
+    "CommuniqueType": "SubscribeResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/114/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/114/status",
+            "OccupancyStatus": "Unknown",
+            "CurrentScene": null
+        }
+    }
+}
+
+2025-05-21 18:44:43.624420
+{
+    "CommuniqueType": "SubscribeResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/127/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/127/status",
+            "OccupancyStatus": "Unknown",
+            "CurrentScene": null
+        }
+    }
+}
+
+2025-05-21 18:44:43.636035
+{
+    "CommuniqueType": "SubscribeResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "Level": 0,
+            "OccupancyStatus": "Unoccupied",
+            "CurrentScene": {
+                "href": "/areascene/987"
+            }
+        }
+    }
+}
+
+2025-05-21 18:44:43.643883
+{
+    "CommuniqueType": "SubscribeResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/1009/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/1009/status",
+            "Level": 100,
+            "OccupancyStatus": "Unknown",
+            "CurrentScene": {
+                "href": "/areascene/1014"
+            }
+        }
+    }
+}
+
+2025-05-21 18:44:43.661432
+{
+    "CommuniqueType": "SubscribeResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/1022/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/1022/status",
+            "Level": 100,
+            "OccupancyStatus": "Unoccupied",
+            "CurrentScene": {
+                "href": "/areascene/1027"
+            }
+        }
+    }
+}
+
+2025-05-21 18:44:43.672814
+{
+    "CommuniqueType": "SubscribeResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/1519/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/1519/status",
+            "OccupancyStatus": "Unknown",
+            "CurrentScene": {
+                "href": "/areascene/1524"
+            }
+        }
+    }
+}
+
+2025-05-21 18:44:43.679760
+{
+    "CommuniqueType": "SubscribeResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/1533/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/1533/status",
+            "Level": 100,
+            "OccupancyStatus": "Unknown",
+            "CurrentScene": {
+                "href": "/areascene/1538"
+            }
+        }
+    }
+}
+
+2025-05-21 18:44:43.692112
+{
+    "CommuniqueType": "ExceptionResponse",
+    "Header": {
+        "MessageBodyType": "ExceptionDetail",
+        "StatusCode": "405 MethodNotAllowed",
+        "Url": "/zone/1035/status"
+    },
+    "Body": {
+        "Message": "This request is not supported"
+    }
+}
+
+2025-05-21 18:44:43.708022
+{
+    "CommuniqueType": "ExceptionResponse",
+    "Header": {
+        "MessageBodyType": "ExceptionDetail",
+        "StatusCode": "405 MethodNotAllowed",
+        "Url": "/zone/1107/status"
+    },
+    "Body": {
+        "Message": "This request is not supported"
+    }
+}
+
+2025-05-21 18:44:43.713954
+{
+    "CommuniqueType": "ExceptionResponse",
+    "Header": {
+        "MessageBodyType": "ExceptionDetail",
+        "StatusCode": "405 MethodNotAllowed",
+        "Url": "/zone/1116/status"
+    },
+    "Body": {
+        "Message": "This request is not supported"
+    }
+}
+
+2025-05-21 18:44:43.724671
+{
+    "CommuniqueType": "ExceptionResponse",
+    "Header": {
+        "MessageBodyType": "ExceptionDetail",
+        "StatusCode": "405 MethodNotAllowed",
+        "Url": "/zone/1125/status"
+    },
+    "Body": {
+        "Message": "This request is not supported"
+    }
+}
+
+2025-05-21 18:44:43.740672
+{
+    "CommuniqueType": "ExceptionResponse",
+    "Header": {
+        "MessageBodyType": "ExceptionDetail",
+        "StatusCode": "405 MethodNotAllowed",
+        "Url": "/zone/1748/status"
+    },
+    "Body": {
+        "Message": "This request is not supported"
+    }
+}
+
+2025-05-21 18:44:43.749523
+{
+    "CommuniqueType": "ExceptionResponse",
+    "Header": {
+        "MessageBodyType": "ExceptionDetail",
+        "StatusCode": "405 MethodNotAllowed",
+        "Url": "/zone/1769/status"
+    },
+    "Body": {
+        "Message": "This request is not supported"
+    }
+}
+
+2025-05-21 18:44:43.763690
+{
+    "CommuniqueType": "ExceptionResponse",
+    "Header": {
+        "MessageBodyType": "ExceptionDetail",
+        "StatusCode": "405 MethodNotAllowed",
+        "Url": "/zone/1719/status"
+    },
+    "Body": {
+        "Message": "This request is not supported"
+    }
+}
+
+2025-05-21 18:44:43.775074
+{
+    "CommuniqueType": "ExceptionResponse",
+    "Header": {
+        "MessageBodyType": "ExceptionDetail",
+        "StatusCode": "405 MethodNotAllowed",
+        "Url": "/zone/1690/status"
+    },
+    "Body": {
+        "Message": "This request is not supported"
+    }
+}
+
+2025-05-21 18:44:45.498786
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "CurrentScene": null
+        }
+    }
+}
+
+2025-05-21 18:44:45.688153
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 100,
+            "InstantaneousMaxPower": 550
+        }
+    }
+}
+
+2025-05-21 18:44:47.478334
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 550,
+            "InstantaneousMaxPower": 550,
+            "CurrentScene": {
+                "href": "/areascene/991"
+            }
+        }
+    }
+}
+
+2025-05-21 18:44:49.091451
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 0,
+            "InstantaneousMaxPower": 550,
+            "CurrentScene": {
+                "href": "/areascene/987"
+            }
+        }
+    }
+}
+
+2025-05-21 18:44:50.283056
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 550,
+            "InstantaneousMaxPower": 550,
+            "CurrentScene": {
+                "href": "/areascene/989"
+            }
+        }
+    }
+}
+
+2025-05-21 18:44:51.298989
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "CurrentScene": {
+                "href": "/areascene/987"
+            }
+        }
+    }
+}
+
+2025-05-21 18:44:51.489157
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 0,
+            "InstantaneousMaxPower": 550
+        }
+    }
+}
+
+2025-05-21 18:44:55.298586
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "CurrentScene": {
+                "href": "/areascene/989"
+            }
+        }
+    }
+}
+
+2025-05-21 18:44:55.489440
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 550,
+            "InstantaneousMaxPower": 550
+        }
+    }
+}
+
+2025-05-21 18:44:57.301501
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 0,
+            "InstantaneousMaxPower": 550,
+            "CurrentScene": {
+                "href": "/areascene/987"
+            }
+        }
+    }
+}
+
+2025-05-21 18:44:59.284175
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 550,
+            "InstantaneousMaxPower": 550,
+            "CurrentScene": {
+                "href": "/areascene/989"
+            }
+        }
+    }
+}
+
+2025-05-21 18:45:00.489827
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 0,
+            "InstantaneousMaxPower": 550,
+            "CurrentScene": {
+                "href": "/areascene/987"
+            }
+        }
+    }
+}
+
+2025-05-21 18:45:02.104998
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "CurrentScene": {
+                "href": "/areascene/989"
+            }
+        }
+    }
+}
+
+2025-05-21 18:45:02.301834
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 550,
+            "InstantaneousMaxPower": 550
+        }
+    }
+}
+
+2025-05-21 18:45:03.895817
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "CurrentScene": {
+                "href": "/areascene/988"
+            }
+        }
+    }
+}
+
+2025-05-21 18:45:04.102300
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 450,
+            "InstantaneousMaxPower": 550
+        }
+    }
+}
+
+2025-05-21 18:45:05.304993
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 0,
+            "InstantaneousMaxPower": 550,
+            "CurrentScene": {
+                "href": "/areascene/987"
+            }
+        }
+    }
+}
+
+2025-05-21 18:45:17.100143
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "OccupancyStatus": "Occupied",
+            "CurrentScene": {
+                "href": "/areascene/988"
+            }
+        }
+    }
+}
+
+2025-05-21 18:45:17.504651
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 450,
+            "InstantaneousMaxPower": 550
+        }
+    }
+}
+
+2025-05-21 18:45:20.896787
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/1022/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/1022/status",
+            "OccupancyStatus": "Occupied"
+        }
+    }
+}
+
+2025-05-21 18:46:05.522405
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/1009/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/1009/status",
+            "InstantaneousPower": 0,
+            "InstantaneousMaxPower": 100,
+            "CurrentScene": {
+                "href": "/areascene/1013"
+            }
+        }
+    }
+}
+
+2025-05-21 18:46:06.732412
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/1009/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/1009/status",
+            "InstantaneousPower": 100,
+            "InstantaneousMaxPower": 100,
+            "CurrentScene": {
+                "href": "/areascene/1014"
+            }
+        }
+    }
+}
+
+2025-05-21 18:46:08.724746
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "CurrentScene": {
+                "href": "/areascene/991"
+            }
+        }
+    }
+}
+
+2025-05-21 18:46:08.925930
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 550,
+            "InstantaneousMaxPower": 550
+        }
+    }
+}
+
+2025-05-21 18:46:10.336933
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 450,
+            "InstantaneousMaxPower": 550,
+            "CurrentScene": {
+                "href": "/areascene/988"
+            }
+        }
+    }
+}
+
+2025-05-21 18:46:11.320302
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "CurrentScene": {
+                "href": "/areascene/991"
+            }
+        }
+    }
+}
+
+2025-05-21 18:46:11.543059
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 550,
+            "InstantaneousMaxPower": 550
+        }
+    }
+}
+
+2025-05-21 18:46:11.741581
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "CurrentScene": {
+                "href": "/areascene/987"
+            }
+        }
+    }
+}
+
+2025-05-21 18:46:11.924996
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "CurrentScene": {
+                "href": "/areascene/989"
+            }
+        }
+    }
+}
+
+2025-05-21 18:46:12.354389
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "CurrentScene": {
+                "href": "/areascene/987"
+            }
+        }
+    }
+}
+
+2025-05-21 18:46:12.527981
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "CurrentScene": {
+                "href": "/areascene/989"
+            }
+        }
+    }
+}
+
+2025-05-21 18:46:12.740476
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "InstantaneousPower": 0,
+            "InstantaneousMaxPower": 550,
+            "CurrentScene": {
+                "href": "/areascene/987"
+            }
+        }
+    }
+}
+
+2025-05-21 18:46:13.352552
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "CurrentScene": {
+                "href": "/areascene/989"
+            }
+        }
+    }
+}
+
+2025-05-21 18:46:13.525849
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/983/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/983/status",
+            "CurrentScene": {
+                "href": "/areascene/987"
+            }
+        }
+    }
+}
+
+2025-05-21 18:47:42.970918
+{
+    "CommuniqueType": "ReadResponse",
+    "Header": {
+        "MessageBodyType": "OneAreaStatus",
+        "StatusCode": "200 OK",
+        "Url": "/area/1022/status"
+    },
+    "Body": {
+        "AreaStatus": {
+            "href": "/area/1022/status",
+            "OccupancyStatus": "Unoccupied",
+            "InstantaneousPower": 0,
+            "InstantaneousMaxPower": 100,
+            "CurrentScene": {
+                "href": "/areascene/1026"
+            }
+        }
+    }
+}
+

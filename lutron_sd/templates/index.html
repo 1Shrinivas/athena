@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Lutron Area & Zone Discovery</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            background: #f9f9f9;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .output, .dashboard {
+            background: #fff;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #ccc;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        #realtime-updates {
+            white-space: pre-wrap;
+            font-family: monospace;
+            background-color: #eef6ff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lutron Discover & Subscribe</h1>
+
+    <div>
+        <button onclick="fetchData('/discover')">Discover All</button>
+        <button onclick="fetchData('/root-areas')">Discover Root Areas</button>
+        <button onclick="fetchData('/leaf-areas')">Discover Leaf Areas</button>
+        <button onclick="fetchData('/child-areas')">Discover Child Areas</button>
+        <button onclick="fetchData('/zones')">Discover Zones</button>
+        <button id="toggle-button">📊 View Status Dashboard</button>
+    </div>
+
+    <div class="output" id="output">
+        Click a button to fetch data...
+    </div>
+
+    <h2>🔴 Real-Time Updates</h2>
+    <div id="realtime-updates" class="output">
+        Waiting for updates...
+    </div>
+
+    <h2>✅ Zone Status Dashboard</h2>
+    <div id="status-dashboard" class="dashboard" style="display:none;">
+        <table id="status-table">
+            <thead>
+                <tr>
+                    <th>Zone ID</th>
+                    <th>Zone Name</th>
+                    <th>Status</th>
+                    <th>Last Updated</th>
+                </tr>
+            </thead>
+            <tbody id="status-body">
+                <!-- Filled dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Handle data fetching and table rendering
+        function renderTable(data) {
+            if (!Array.isArray(data) || data.length === 0) {
+                $('#output').html("No data available.");
+                return;
+            }
+
+            const keys = new Set();
+            data.forEach(item => Object.keys(item).forEach(k => keys.add(k)));
+            const columns = [...keys];
+
+            let table = '<table><thead><tr>';
+            table += columns.map(col => `<th>${col}</th>`).join('');
+            table += '</tr></thead><tbody>';
+
+            data.forEach(item => {
+                table += '<tr>';
+                table += columns.map(col => `<td>${item[col] !== undefined ? item[col] : ''}</td>`).join('');
+                table += '</tr>';
+            });
+
+            table += '</tbody></table>';
+            $('#output').html(table);
+        }
+
+        function fetchData(endpoint) {
+            $('#output').html("Loading...");
+            $.get(endpoint, function(data) {
+                if (Array.isArray(data)) {
+                    renderTable(data);
+                } else if (typeof data === 'object') {
+                    const firstArray = Object.values(data).find(v => Array.isArray(v));
+                    if (firstArray) {
+                        renderTable(firstArray);
+                    } else {
+                        $('#output').html("No array data found in response.");
+                    }
+                } else {
+                    $('#output').text("Unsupported data format.");
+                }
+            }).fail(function(err) {
+                $('#output').text("Error fetching data: " + err.responseText);
+            });
+        }
+
+        // Dashboard Toggle Logic
+        document.getElementById("toggle-button").addEventListener("click", function () {
+            const dashboard = document.getElementById("status-dashboard");
+            dashboard.style.display = dashboard.style.display === "none" ? "block" : "none";
+        });
+
+        // SSE for real-time updates
+        const eventSource = new EventSource("/stream");
+        const statusMap = new Map();
+
+        eventSource.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            const log = document.getElementById("realtime-updates");
+            const now = new Date().toLocaleTimeString();
+            const msg = `[${now}] ${data.message || JSON.stringify(data)}\n\n`;
+            log.textContent = msg + log.textContent;
+
+            if (log.textContent.length > 10000) {
+                log.textContent = log.textContent.substring(0, 10000);
+            }
+
+            if (data.zone_id && data.status !== undefined) {
+                const zoneId = data.zone_id;
+                const zoneName = data.zone_name || "Unknown";
+                const status = data.status;
+
+                statusMap.set(zoneId, {
+                    id: zoneId,
+                    name: zoneName,
+                    status: status,
+                    updated: now
+                });
+
+                renderStatusTable();
+            }
+        };
+
+        function renderStatusTable() {
+            const tbody = document.getElementById("status-body");
+            tbody.innerHTML = "";
+
+            Array.from(statusMap.values()).forEach(zone => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${zone.id}</td>
+                    <td>${zone.name}</td>
+                    <td>${zone.status}</td>
+                    <td>${zone.updated}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        eventSource.onerror = function() {
+            console.error("SSE connection lost.");
+        };
+    </script>
+</body>
+</html>
+
+
+{#
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Lutron Area & Zone Discovery</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            background: #f9f9f9;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .output, .dashboard {
+            background: #fff;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #ccc;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        #realtime-updates {
+            white-space: pre-wrap;
+            font-family: monospace;
+            background-color: #eef6ff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lutron Discover & Subscribe</h1>
+
+    <div>
+        <button onclick="fetchData('/discover')">Discover All</button>
+        <button onclick="fetchData('/root-areas')">Discover Root Areas</button>
+        <button onclick="fetchData('/leaf-areas')">Discover Leaf Areas</button>
+        <button onclick="fetchData('/child-areas')">Discover Child Areas</button>
+        <button onclick="fetchData('/zones')">Discover Zones</button>
+        <button onclick="toggleDashboard()">📊 View Status Dashboard</button>
+    </div>
+
+    <div class="output" id="output">
+        Click a button to fetch data...
+    </div>
+
+    <h2>🔴 Real-Time Updates</h2>
+    <div id="realtime-updates" class="output">
+        Waiting for updates...
+    </div>
+
+    <h2>✅ Zone Status Dashboard</h2>
+    <div id="status-dashboard" class="dashboard" style="display:none;">
+        <table id="status-table">
+            <thead>
+                <tr>
+                    <th>Zone ID</th>
+                    <th>Zone Name</th>
+                    <th>Status</th>
+                    <th>Last Updated</th>
+                </tr>
+            </thead>
+            <tbody id="status-body">
+                <!-- Filled dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function renderTable(data) {
+            if (!Array.isArray(data) || data.length === 0) {
+                $('#output').html("No data available.");
+                return;
+            }
+
+            const keys = new Set();
+            data.forEach(item => Object.keys(item).forEach(k => keys.add(k)));
+            const columns = [...keys];
+
+            let table = '<table><thead><tr>';
+            table += columns.map(col => `<th>${col}</th>`).join('');
+            table += '</tr></thead><tbody>';
+
+            data.forEach(item => {
+                table += '<tr>';
+                table += columns.map(col => `<td>${item[col] !== undefined ? item[col] : ''}</td>`).join('');
+                table += '</tr>';
+            });
+
+            table += '</tbody></table>';
+            $('#output').html(table);
+        }
+
+        function fetchData(endpoint) {
+            $('#output').html("Loading...");
+            $.get(endpoint, function(data) {
+                if (Array.isArray(data)) {
+                    renderTable(data);
+                } else if (typeof data === 'object') {
+                    const firstArray = Object.values(data).find(v => Array.isArray(v));
+                    if (firstArray) {
+                        renderTable(firstArray);
+                    } else {
+                        $('#output').html("No array data found in response.");
+                    }
+                } else {
+                    $('#output').text("Unsupported data format.");
+                }
+            }).fail(function(err) {
+                $('#output').text("Error fetching data: " + err.responseText);
+            });
+        }
+
+        // Toggle Dashboard
+        function toggleDashboard() {
+            const dashboard = document.getElementById("status-dashboard");
+            dashboard.style.display = (dashboard.style.display === "none") ? "block" : "none";
+        }
+
+        // Real-time updates via SSE
+        const eventSource = new EventSource("/stream");
+        const statusMap = new Map();
+
+        eventSource.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            const log = document.getElementById("realtime-updates");
+            const now = new Date().toLocaleTimeString();
+            const msg = `[${now}] ${data.message || JSON.stringify(data)}\n\n`;
+            log.textContent = msg + log.textContent;
+
+            if (log.textContent.length > 10000) {
+                log.textContent = log.textContent.substring(0, 10000);
+            }
+
+            // Status Dashboard Logic
+            if (data.zone_id && data.status !== undefined) {
+                const zoneId = data.zone_id;
+                const zoneName = data.zone_name || "Unknown";
+                const status = data.status;
+
+                statusMap.set(zoneId, {
+                    id: zoneId,
+                    name: zoneName,
+                    status: status,
+                    updated: now
+                });
+
+                renderStatusTable();
+            }
+        };
+
+        function renderStatusTable() {
+            const tbody = document.getElementById("status-body");
+            tbody.innerHTML = "";
+
+            Array.from(statusMap.values()).forEach(zone => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${zone.id}</td>
+                    <td>${zone.name}</td>
+                    <td>${zone.status}</td>
+                    <td>${zone.updated}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        eventSource.onerror = function() {
+            console.error("SSE connection lost.");
+        };
+    </script>
+</body>
+</html>
+#}
+
+{#
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Lutron Area & Zone Discovery</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            background: #f9f9f9;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .output {
+            background: #fff;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #ccc;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        #realtime-updates {
+            white-space: pre-wrap;
+            font-family: monospace;
+            max-height: 300px;
+            overflow-y: auto;
+            background-color: #eef6ff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lutron Discover & Subscribe</h1>
+
+    <div>
+        <button onclick="fetchData('/discover')">Discover All</button>
+        <button onclick="fetchData('/root-areas')">Discover Root Areas</button>
+        <button onclick="fetchData('/leaf-areas')">Discover Leaf Areas</button>
+        <button onclick="fetchData('/child-areas')">Discover Child Areas</button>
+        <button onclick="fetchData('/zones')">Discover Zones</button>
+    </div>
+
+    <div class="output" id="output">
+        Click a button to fetch data...
+    </div>
+
+    <h2>🔴 Real-Time Updates</h2>
+    <div id="realtime-updates" class="output">
+        Waiting for updates...
+    </div>
+
+    <script>
+        function renderTable(data) {
+            if (!Array.isArray(data) || data.length === 0) {
+                $('#output').html("No data available.");
+                return;
+            }
+            
+
+            const keys = new Set();
+            data.forEach(item => Object.keys(item).forEach(k => keys.add(k)));
+            const columns = [...keys];
+
+            let table = '<table><thead><tr>';
+            table += columns.map(col => `<th>${col}</th>`).join('');
+            table += '</tr></thead><tbody>';
+
+            data.forEach(item => {
+                table += '<tr>';
+                table += columns.map(col => `<td>${item[col] !== undefined ? item[col] : ''}</td>`).join('');
+                table += '</tr>';
+            });
+
+            table += '</tbody></table>';
+            $('#output').html(table);
+        }
+
+        function fetchData(endpoint) {
+        $('#output').html("Loading...");
+        $.get(endpoint, function(data) {
+        // Check if data is an object with array inside
+        if (Array.isArray(data)) {
+            renderTable(data);
+        } else if (typeof data === 'object') {
+            const firstArray = Object.values(data).find(v => Array.isArray(v));
+            if (firstArray) {
+                renderTable(firstArray);
+            } else {
+                $('#output').html("No array data found in response.");
+            }
+        } else {
+            $('#output').text("Unsupported data format.");
+        }
+    }).fail(function(err) {
+        $('#output').text("Error fetching data: " + err.responseText);
+    });
+}
+
+
+        // SSE Section (unchanged)
+        const eventSource = new EventSource("/stream");
+
+        eventSource.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            const log = document.getElementById("realtime-updates");
+            const now = new Date().toLocaleTimeString();
+            const msg = `[${now}] ${data.message || JSON.stringify(data)}\n\n`;
+            log.textContent = msg + log.textContent;
+
+            if (log.textContent.length > 10000) {
+                log.textContent = log.textContent.substring(0, 10000);
+            }
+        };
+
+        eventSource.onerror = function() {
+            console.error("SSE connection lost.");
+        };
+    </script>
+</body>
+</html>
+#}
+
+
+{#
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Lutron Area & Zone Discovery</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            background: #f9f9f9;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .output {
+            background: #fff;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #ccc;
+            white-space: pre-wrap;
+            font-family: monospace;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        #realtime-updates {
+            white-space: pre-wrap;
+            font-family: monospace;
+            max-height: 300px;
+            overflow-y: auto;
+            background-color: #eef6ff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lutron Discover & Subscribe</h1>
+
+    <div>
+        <button onclick="fetchData('/discover')">Discover All</button>
+        <button onclick="fetchData('/root-areas')">Discover Root Areas</button>
+        <button onclick="fetchData('/leaf-areas')">Discover Leaf Areas</button>
+        <button onclick="fetchData('/child-areas')">Discover Child Areas</button>
+        <button onclick="fetchData('/zones')">Discover Zones</button>
+    </div>
+
+    <div class="output" id="output">
+        Click a button to fetch data...
+    </div>
+
+    <h2>🔴 Real-Time Updates</h2>
+    <div id="realtime-updates" class="output">
+        Waiting for updates...
+    </div>
+
+    <script>
+        function fetchData(endpoint) {
+            $('#output').text("Loading...");
+            $.get(endpoint, function(data) {
+                $('#output').text(JSON.stringify(data, null, 2));
+            }).fail(function(err) {
+                $('#output').text("Error fetching data: " + err.responseText);
+            });
+        }
+
+        // Server-Sent Events for real-time updates
+        const eventSource = new EventSource("/stream");
+
+        eventSource.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            const log = document.getElementById("realtime-updates");
+            const now = new Date().toLocaleTimeString();
+
+            // Assuming your SSE data has a 'message' field; adjust as needed
+            const msg = `[${now}] ${data.message || JSON.stringify(data)}\n\n`;
+
+            // Prepend new messages so latest on top
+            log.textContent = msg + log.textContent;
+
+            // Optionally limit log size for performance (last 1000 chars)
+            if (log.textContent.length > 10000) {
+                log.textContent = log.textContent.substring(0, 10000);
+            }
+        };
+
+        eventSource.onerror = function() {
+            console.error("SSE connection lost.");
+        };
+    </script>
+</body>
+</html>
+#}
+
+{#
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lutron Control</title>
+    
+    <script>
+        function toggleSection(sectionId) {
+            let section = document.getElementById(sectionId);
+            section.style.display = section.style.display === "none" ? "block" : "none";
+        }
+
+        function showWidget(widgetId) {
+            document.querySelectorAll('.widget').forEach(widget => {
+                widget.style.display = "none";
+            });
+            document.getElementById(widgetId).style.display = "block";
+        }
+
+        function fetchDiscoveryData() {
+            fetch('/discover')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('areas-content').innerHTML = createAreaSummariesTable(data.AreaSummaries);
+                    showWidget('areas-widget');
+                })
+                .catch(error => {
+                    console.error("Error fetching areas:", error);
+                    document.getElementById('areas-content').innerHTML = "<p style='color: red;'>Error fetching areas.</p>";
+                });
+        }
+
+        function fetchZonesData() {
+            fetch('/zones')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('zones-content').innerHTML = createZonesTable(data);
+                    showWidget('zones-widget');
+                })
+                .catch(error => {
+                    console.error("Error fetching zones:", error);
+                    document.getElementById('zones-content').innerHTML = "<p style='color: red;'>Error fetching zones.</p>";
+                });
+        }
+
+        function createAreaSummariesTable(data) {
+            if (!data || data.length === 0) return "<p>No areas found.</p>";
+            
+            let table = `<h3>Area Summaries</h3>
+                         <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parent Area</th>
+                                    <th>Sort Order</th>
+                                </tr>
+                            </thead>
+                            <tbody>`;
+
+            data.forEach(area => {
+                table += `<tr>
+                            <td>${area.Name}</td>
+                            <td>${area.Parent ? `<a href='#' onclick='fetchChildAreas("${area.Parent.href}")'>${area.Parent.href}</a>` : 'None'}</td>
+                            <td>${area.SortOrder}</td>
+                          </tr>`;
+            });
+
+            table += "</tbody></table>";
+            return table;
+        }
+
+        function createZonesTable(data) {
+            if (!data || data.length === 0) return "<p>No zones found.</p>";
+            
+            let table = `<h3>Zones</h3>
+                         <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Zone ID</th>
+                                    <th>Associated Area</th>
+                                </tr>
+                            </thead>
+                            <tbody>`;
+
+            data.forEach(zone => {
+                table += `<tr>
+                            <td>${zone.Name}</td>
+                            <td>${zone.href}</td>
+                            <td>${zone.AssociatedArea ? `<a href='#' onclick='fetchZones("${zone.AssociatedArea.href}")'>${zone.AssociatedArea.href}</a>` : 'None'}</td>
+                          </tr>`;
+            });
+
+            table += "</tbody></table>";
+            return table;
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .tab-container {
+            display: flex;
+            background-color: #007BFF;
+            padding: 10px;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            cursor: pointer;
+            background-color: #0056b3;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border-right: 1px solid white;
+        }
+
+        .tab:last-child {
+            border-right: none;
+        }
+
+        .tab:hover {
+            background-color: #004080;
+        }
+
+        .content-section {
+            padding: 20px;
+            display: none;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            margin-top: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .button-container button {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .button-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .widget {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <body>
+    <div class="tab-container">
+        <div class="tab" onclick="toggleSection('discovery-section')">Discovery</div>
+        <div class="tab" onclick="toggleSection('design-section')">Design</div>
+    </div>
+
+    <!-- Discovery Section -->
+    <div id="discovery-section" class="content-section">
+        <h2>Discovery</h2>
+        <div class="button-container">
+            <button onclick="alert('Testing Communication...'); showWidget('test-widget')">Test Communication</button>
+            <button onclick="fetchDiscoveryData()">Discover Areas</button>
+            <button onclick="fetchZonesData()">Discover Zones</button>
+            <button onclick="alert('Subscribe feature not implemented'); showWidget('subscribe-widget')">Subscribe</button>
+        </div>
+
+        <div id="test-widget" class="widget">
+            <h3>Test Communication</h3>
+            <p>Communication test executed successfully.</p>
+        </div>
+
+        <div id="areas-widget" class="widget">
+            <h3>Areas</h3>
+            <div id="areas-content">Click "Discover Areas" to fetch data...</div>
+        </div>
+
+        <div id="zones-widget" class="widget">
+            <h3>Zones</h3>
+            <div id="zones-content">Click "Discover Zones" to fetch data...</div>
+        </div>
+
+        <div id="subscribe-widget" class="widget">
+            <h3>Subscribe</h3>
+            <p>Subscribe feature not yet implemented.</p>
+        </div>
+    </div>
+
+    <!-- Design Section -->
+    <div id="design-section" class="content-section">
+        <h2>Design</h2>
+        <p>Design settings will be added here.</p>
+    </div>
+</body>
+</html>
+
+#}
+
+
+{#
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lutron Control</title>
+
+    <script>
+        function fetchDiscoveryData() {
+            fetch('/discover')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('areas').innerHTML = createAreaSummariesTable(data.AreaSummaries);
+                })
+                .catch(error => {
+                    console.error("Error fetching areas:", error);
+                    document.getElementById('areas').innerHTML = "<p style='color: red;'>Error fetching areas.</p>";
+                });
+        }
+
+        function fetchZonesData() {
+            fetch('/zones')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('zones').innerHTML = createZonesTable(data);
+                })
+                .catch(error => {
+                    console.error("Error fetching zones:", error);
+                    document.getElementById('zones').innerHTML = "<p style='color: red;'>Error fetching zones.</p>";
+                });
+        }
+
+        function createAreaSummariesTable(data) {
+            if (!data || data.length === 0) return "<p>No areas found.</p>";
+            
+            let table = `<h3>Area Summaries</h3>
+                         <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parent Area</th>
+                                    <th>Sort Order</th>
+                                </tr>
+                            </thead>
+                            <tbody>`;
+
+            data.forEach(area => {
+                table += `<tr>
+                            <td>${area.Name}</td>
+                            <td>${area.Parent ? `<a href='#' onclick='fetchChildAreas("${area.Parent.href}")'>${area.Parent.href}</a>` : 'None'}</td>
+                            <td>${area.SortOrder}</td>
+                          </tr>`;
+            });
+
+            table += "</tbody></table>";
+            return table;
+        }
+
+        function createZonesTable(data) {
+            if (!data || data.length === 0) return "<p>No zones found.</p>";
+            
+            let table = `<h3>Zones</h3>
+                         <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Zone ID</th>
+                                    <th>Associated Area</th>
+                                </tr>
+                            </thead>
+                            <tbody>`;
+
+            data.forEach(zone => {
+                table += `<tr>
+                            <td>${zone.Name}</td>
+                            <td>${zone.href}</td>
+                            <td>${zone.AssociatedArea ? `<a href='#' onclick='fetchZones("${zone.AssociatedArea.href}")'>${zone.AssociatedArea.href}</a>` : 'None'}</td>
+                          </tr>`;
+            });
+
+            table += "</tbody></table>";
+            return table;
+        }
+
+        function fetchChildAreas(areaHref) {
+            fetch(`/child-areas?parent=${areaHref}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('areas').innerHTML = createAreaSummariesTable(data);
+                });
+        }
+
+        function fetchZones(areaHref) {
+            fetch(`/zones?area=${areaHref}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('zones').innerHTML = createZonesTable(data);
+                });
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background-color: #007BFF;
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .sidebar button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: white;
+            color: #007BFF;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        .sidebar button:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            max-height: 400px;
+            overflow: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Lutron Control</h2>
+        <button onclick="fetchDiscoveryData()">Discover Areas</button>
+        <button onclick="fetchZonesData()">Discover Zones</button>
+    </div>
+
+    <div class="main-content">
+        <h1>Lutron Dashboard</h1>
+        
+        <div id="areas" class="result-box">
+            <h3>Areas</h3>
+            <p>Click "Discover Areas" to fetch data...</p>
+        </div>
+
+        <div id="zones" class="result-box">
+            <h3>Zones</h3>
+            <p>Click "Discover Zones" to fetch data...</p>
+        </div>
+    </div>
+</body>
+</html>
+#}
+
+
+{#
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lutron Control</title>
+    <script>
+        function fetchData(endpoint, resultDiv) {
+            fetch(endpoint)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById(resultDiv).innerHTML = "<pre>" + JSON.stringify(data, null, 4) + "</pre>";
+                })
+                .catch(error => {
+                    console.error("Error fetching data:", error);
+                    document.getElementById(resultDiv).innerHTML = "<p style='color: red;'>Error fetching data.</p>";
+                });
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .result-box {
+            text-align: left;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            max-height: 400px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Lutron Dashboard</h1>
+        
+        <button onclick="fetchData('/root-areas', 'result')">Test Communication</button>
+        <button onclick="fetchData('/discover', 'result')">Discover Area</button>
+        <button onclick="fetchData('/zones', 'result')">Discover Zone</button>
+        <button onclick="fetchData('/scene', 'result')">Discover Scene</button>
+
+        <div id="result" class="result-box">
+            <p>Click a button to fetch data...</p>
+        </div>
+    </div>
+
+</body>
+</html>
+#}
+
+
+{#
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lutron Dashboard</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .btn-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Lutron Dashboard</h1>
+
+    <div class="btn-container">
+        <button onclick="fetchData('/root-areas', 'Root Areas')">Root Areas</button>
+        <button onclick="fetchData('/leaf-areas', 'Leaf Areas')">Leaf Areas</button>
+        <button onclick="fetchData('/child-areas', 'Child Areas')">Child Areas</button>
+        <button onclick="fetchData('/zones', 'Zones')">Zones</button>
+    </div>
+
+    <h2 id="table-title">Data Table</h2>
+    <table id="data-table">
+        <thead>
+            <tr id="table-header"></tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+    </table>
+
+    <script>
+        function fetchData(endpoint, title) {
+            $("#table-title").text(title);
+            $("#table-header").empty();
+            $("#table-body").empty();
+
+            $.get(endpoint, function(data) {
+                if (data.length === 0) {
+                    $("#table-body").append("<tr><td colspan='5'>No data available</td></tr>");
+                    return;
+                }
+
+                let headers = Object.keys(data[0]);
+                let headerRow = "<tr>";
+                headers.forEach(header => {
+                    headerRow += `<th>${header}</th>`;
+                });
+                headerRow += "</tr>";
+                $("#table-header").html(headerRow);
+
+                data.forEach(item => {
+                    let row = "<tr>";
+                    headers.forEach(header => {
+                        row += `<td>${item[header]}</td>`;
+                    });
+                    row += "</tr>";
+                    $("#table-body").append(row);
+                });
+            }).fail(function() {
+                $("#table-body").append("<tr><td colspan='5'>Error fetching data</td></tr>");
+            });
+        }
+    </script>
+
+</body>
+</html>
+#}
+{#
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lutron System Discovery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        pre {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            border-radius: 5px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+    <script>
+        function discover() {
+            document.getElementById("result").innerHTML = "Discovering...";
+            fetch('/discover')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("result").innerHTML = JSON.stringify(data, null, 4);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById("result").innerHTML = "Failed to retrieve data.";
+                });
+        }
+    </script>
+</head>
+<body>
+    <h1>Lutron System Discovery</h1>
+    <div class="container">
+        <button onclick="discover()">Discover</button>
+        <pre id="result">Press "Discover" to fetch data...</pre>
+    </div>
+</body>
+</html>
+#}
+
+{#
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area Discovery</title>
+    <script>
+        async function fetchData() {
+            try {
+                const response = await fetch('/discover_areas');
+                const data = await response.json();
+
+                if (!data.success) {
+                    document.getElementById('result').innerHTML = `<p>Error: ${data.error}</p>`;
+                    return;
+                }
+
+                document.getElementById('result').innerHTML = `
+                    <h3>All Areas:</h3>
+                    ${renderList(data.all_areas)}
+                    <h3>Child Areas:</h3>
+                    ${renderChildAreas(data.child_areas)}
+                    <h3>All Leaf Areas:</h3>
+                    ${renderList(data.leaf_areas)}
+                    <h3>Associated Zones:</h3>
+                    ${renderZones(data.associated_zones)}
+                `;
+            } catch (error) {
+                document.getElementById('result').innerHTML = `<p>Error fetching data: ${error}</p>`;
+            }
+        }
+
+        function renderList(items) {
+            if (!items || items.length === 0) return '<p>No data available.</p>';
+            return `<ul>${items.map(item => `<li>${item}</li>`).join('')}</ul>`;
+        }
+
+        function renderChildAreas(areas) {
+            if (!areas || areas.length === 0) return '<p>No child areas available.</p>';
+            return `
+                <ul>
+                    ${areas.map(area => `
+                        <li>
+                            <strong>${area.Name}</strong> (Parent: ${area.Parent}) - 
+                            ${area.IsLeaf ? "Leaf Area" : "Non-Leaf Area"}
+                        </li>
+                    `).join('')}
+                </ul>
+            `;
+        }
+
+        function renderZones(zones) {
+            if (!zones || zones.length === 0) return '<p>No associated zones found.</p>';
+            return `
+                <ul>
+                    ${zones.map(zone => `
+                        <li>
+                            <strong>${zone.Name}</strong> (ID: ${zone["Zone ID"]}) - 
+                            Control Type: ${zone.ControlType} - 
+                            Light: ${zone.IsLight ? "Yes" : "No"} - 
+                            Associated Area: ${zone["Associated Area"]}
+                        </li>
+                    `).join('')}
+                </ul>
+            `;
+        }
+    </script>
+</head>
+<body>
+    <h1>Discover Areas</h1>
+    <button onclick="fetchData()">Fetch Areas</button>
+    <div id="result"></div>
+</body>
+</html>
+#}
+
+
+
+
